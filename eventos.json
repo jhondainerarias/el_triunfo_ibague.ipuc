@@ -1,98 +1,11 @@
 [
-  {
-    "id": "1",
-    "title": "Culto de Apertura de Año",
-    "date": "2027-01-01",
-    "time": "19:00",
-    "category": "Institucional",
-    "description": "Gran servicio especial de acción de gracias."
-  },
-  {
-    "id": "2",
-    "title": "proximamente",
-    "date": "2027-02-14",
-    "time": "10:00",
-    "category": "Institucional",
-    "description": "Celebración de la Cena del Señor."
-  },
-  {
-    "id": "1792884717262",
-    "title": "jovenes",
-    "date": "2027-01-02",
-    "time": "18:00",
-    "category": "Reunión",
-    "description": "aseo  ujieres"
-  },
-  {
-    "id": "1792884739141",
-    "title": "misiones",
-    "date": "2027-01-03",
-    "time": "09:00",
-    "category": "Urgente",
-    "description": ""
-  },
-  {
-    "id": "1792884758036",
-    "title": "damas",
-    "date": "2027-01-05",
-    "time": "18:00",
-    "category": "Reunión",
-    "description": ""
-  },
-  {
-    "id": "1792884770972",
-    "title": "junta local",
-    "date": "2027-01-07",
-    "time": "18:00",
-    "category": "Reunión",
-    "description": ""
-  },
-  {
-    "id": "1792884835351",
-    "title": "jovenes",
-    "date": "2027-01-09",
-    "time": "18:00",
-    "category": "Reunión",
-    "description": ""
-  },
-  {
-    "id": "1792885151471",
-    "title": "junta local",
-    "date": "2027-01-10",
-    "time": "09:00",
-    "category": "Urgente",
-    "description": ""
-  },
-  {
-    "id": "1792885177155",
-    "title": "damas dorcas",
-    "date": "2027-01-12",
-    "time": "18:00",
-    "category": "Reunión",
-    "description": ""
-  },
-  {
-    "id": "1792885192655",
-    "title": "junta local",
-    "date": "2027-01-14",
-    "time": "18:00",
-    "category": "Reunión",
-    "description": ""
-  },
-  {
-    "id": "1792885209424",
-    "title": "jovenes",
-    "date": "2027-01-16",
-    "time": "18:00",
-    "category": "Reunión",
-    "description": ""
-  },
+
   {
     "id": "1793056703701",
     "title": "misiones",
     "date": "2026-11-01",
     "time": "09:00",
-    "category": "Urgente",
+    "category": "dia misionero",
     "description": "aseo  alabanza"
   },
   {
@@ -100,7 +13,7 @@
     "title": "damas ",
     "date": "2026-11-03",
     "time": "18:00",
-    "category": "Reunión",
+    "category": "culto",
     "description": "aseo familia"
   },
   {
@@ -108,7 +21,7 @@
     "title": "junta local",
     "date": "2026-11-05",
     "time": "18:00",
-    "category": "Reunión",
+    "category": "culto",
     "description": "aseo obra social"
   },
   {
@@ -116,15 +29,15 @@
     "title": "jovenes   fogata",
     "date": "2026-11-07",
     "time": "18:00",
-    "category": "Reunión",
+    "category": "fogata",
     "description": " aseo edad dorada "
   },
   {
     "id": "1793056903583",
-    "title": "familia  dominical",
+    "title": "culto de  la familia ",
     "date": "2026-11-08",
     "time": "09:00",
-    "category": "Reunión",
+    "category": " familia",
     "description": "aseo restauración"
   },
   {
@@ -140,7 +53,7 @@
     "title": "junta local",
     "date": "2026-11-12",
     "time": "18:00",
-    "category": "Reunión",
+    "category": "culto",
     "description": "aseo decom"
   },
   {
@@ -148,7 +61,7 @@
     "title": "CONFRATERNIDAD misiones",
     "date": "2026-11-14",
     "time": "18:00",
-    "category": "Recordatorio",
+    "category": "confraternidad",
     "description": "aseo asegurabilidad"
   },
   {
@@ -156,7 +69,7 @@
     "title": "CONFRATERNIDAD misiones",
     "date": "2026-11-15",
     "time": "09:00",
-    "category": "Recordatorio",
+    "category": "confraternidad",
     "description": "aseo comité de aseo"
   },
   {
@@ -164,7 +77,7 @@
     "title": "damas",
     "date": "2026-11-17",
     "time": "18:00",
-    "category": "Reunión",
+    "category": "culto",
     "description": "aseo junta local"
   },
   {
@@ -172,7 +85,7 @@
     "title": "junta local",
     "date": "2026-11-19",
     "time": "18:00",
-    "category": "Reunión",
+    "category": "culto",
     "description": "aseo evangelismo"
   },
   {
@@ -180,7 +93,7 @@
     "title": "jovenes",
     "date": "2026-11-21",
     "time": "18:00",
-    "category": "Reunión",
+    "category": "culto",
     "description": "aseo jovenes"
   },
   {
@@ -188,7 +101,7 @@
     "title": "junta local",
     "date": "2026-11-22",
     "time": "09:00",
-    "category": "Urgente",
+    "category": "culto",
     "description": "aseo damas Dorcas"
   },
   {
@@ -196,7 +109,7 @@
     "title": "damas NOCHE DE GALA",
     "date": "2026-11-24",
     "time": "18:00",
-    "category": "Urgente",
+    "category": "evento especial",
     "description": "aseo escuela dominical"
   },
   {
@@ -204,7 +117,7 @@
     "title": "junta local",
     "date": "2026-11-26",
     "time": "18:00",
-    "category": "Reunión",
+    "category": "culto",
     "description": "aseo caballeros"
   },
   {
@@ -212,7 +125,7 @@
     "title": "alabanza  ",
     "date": "2026-11-28",
     "time": "18:00",
-    "category": "Reunión",
+    "category": "culto",
     "description": "aseo alabanza"
   },
   {
@@ -220,7 +133,7 @@
     "title": "ofrenda pro templo, junta local ",
     "date": "2026-11-29",
     "time": "09:00",
-    "category": "Reunión",
+    "category": "culto",
     "description": "restauración  amanecer con cristo,,    aseo  familia"
   },
   {
@@ -228,7 +141,7 @@
     "title": "damas",
     "date": "2026-12-01",
     "time": "18:00",
-    "category": "Reunión",
+    "category": "culto",
     "description": "aseo obra social"
   },
   {
@@ -236,7 +149,7 @@
     "title": "junta local",
     "date": "2026-12-03",
     "time": "18:00",
-    "category": "Reunión",
+    "category": "culto",
     "description": "aseo edad dorada "
   },
   {
@@ -244,7 +157,7 @@
     "title": "encuentro de caballeros ",
     "date": "2026-12-02",
     "time": "18:00",
-    "category": "Institucional",
+    "category": "evento",
     "description": "mas información comité de caballeros "
   },
   {
@@ -252,7 +165,7 @@
     "title": "jovenes ",
     "date": "2026-12-05",
     "time": "18:00",
-    "category": "Reunión",
+    "category": "culto",
     "description": "aseo restauracion"
   },
   {
@@ -260,7 +173,7 @@
     "title": "100 amigos programa de misiones ",
     "date": "2026-12-04",
     "time": "18:00",
-    "category": "Urgente",
+    "category": "misiones",
     "description": "pendiente hora y lugar mas información"
   },
   {
@@ -268,7 +181,7 @@
     "title": "dia misionero",
     "date": "2026-12-06",
     "time": "09:00",
-    "category": "Urgente",
+    "category": "misiones",
     "description": "aseo ujieres "
   },
   {
@@ -276,7 +189,7 @@
     "title": "damas ",
     "date": "2026-12-08",
     "time": "18:00",
-    "category": "Reunión",
+    "category": "culto",
     "description": "aseo decom"
   },
   {
@@ -284,7 +197,7 @@
     "title": "junta local",
     "date": "2026-12-10",
     "time": "18:00",
-    "category": "Reunión",
+    "category": "culto",
     "description": "aseo asegurabilidad"
   },
   {
@@ -292,7 +205,7 @@
     "title": "jovenes",
     "date": "2026-12-12",
     "time": "18:00",
-    "category": "Reunión",
+    "category": "culto",
     "description": "aseo comite de aseo"
   },
   {
@@ -300,7 +213,7 @@
     "title": "CLAUSURA COMITES junta local   y    E.D cierre niños",
     "date": "2026-12-13",
     "time": "09:00",
-    "category": "Urgente",
+    "category": "evento especial",
     "description": "aseo junta local"
   },
   {
@@ -308,7 +221,7 @@
     "title": "damas",
     "date": "2026-12-15",
     "time": "18:00",
-    "category": "Reunión",
+    "category": "culto",
     "description": "aseo evangelismo"
   },
   {
@@ -316,15 +229,15 @@
     "title": "junta local",
     "date": "2026-12-17",
     "time": "18:00",
-    "category": "Reunión",
+    "category": "culto",
     "description": "aseo jovenes"
   },
   {
     "id": "1793058244524",
     "title": "jovenes",
     "date": "2026-12-19",
-    "time": "10:00",
-    "category": "Reunión",
+    "time": "18:00",
+    "category": "culto",
     "description": "aseo damas dorcas"
   },
   {
@@ -332,7 +245,7 @@
     "title": "FAMILIA ",
     "date": "2026-12-20",
     "time": "09:00",
-    "category": "Urgente",
+    "category": "culto",
     "description": "aseo escuela dominical"
   },
   {
@@ -340,7 +253,7 @@
     "title": "cierre damas ",
     "date": "2026-12-22",
     "time": "18:00",
-    "category": "Reunión",
+    "category": "evento especial",
     "description": "aseo caballeros"
   },
   {
@@ -348,7 +261,7 @@
     "title": "junta local",
     "date": "2026-12-24",
     "time": "18:00",
-    "category": "Reunión",
+    "category": "culto",
     "description": "aseo alabanza"
   },
   {
@@ -356,7 +269,7 @@
     "title": "jovenes",
     "date": "2026-12-26",
     "time": "18:00",
-    "category": "Reunión",
+    "category": "culto",
     "description": "aseo familia"
   },
   {
@@ -364,7 +277,7 @@
     "title": "PRO-TEMPLO ofrenda junta local",
     "date": "2026-12-27",
     "time": "09:00",
-    "category": "Reunión",
+    "category": "culto",
     "description": "aseo obra social"
   },
   {
@@ -372,7 +285,7 @@
     "title": "cierre obra social",
     "date": "2026-12-29",
     "time": "18:00",
-    "category": "Reunión",
+    "category": "evento",
     "description": "aseo edad dorada"
   },
   {
@@ -380,7 +293,7 @@
     "title": "SANTA CENA junta local",
     "date": "2026-12-31",
     "time": "18:00",
-    "category": "Urgente",
+    "category": "general ",
     "description": "aseo restauracion"
   }
 ]
