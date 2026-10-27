@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
 <head>
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
     <meta charset="UTF-8">
@@ -213,14 +213,14 @@
                         </h1>
 
                         <h5 class="text-xl sm:text-2xl font-semibold tracking-tight font-sans text-slate-300">
-                          Aquí encuentras la programación para el año <span class="text-amber-400 font-bold">2027</span>
+                          <span class="text-amber-400 font-bold">2027</span>
                         </h5>
                         <p class="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light italic">
                           "¡Ved qué bueno y qué delicioso es habitar los hermanos juntos en armonía!" <span class="not-italic text-amber-400 font-medium">— Salmo 133:1</span>
                         </p>
                         <div class="pt-4 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                             <a href="#agenda" class="inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 text-navy-900 font-bold hover:shadow-lg hover:shadow-amber-500/25 transition-all transform hover:-translate-y-0.5">
-                                <i class="fa-solid fa-calendar-check mr-2"></i> Acceder a la Agenda
+                                <i class="fa-solid fa-calendar-check mr-2"></i>  Aquí encuentras la programación del año
                             </a>
                             <a href="#nosotros" class="inline-flex items-center justify-center px-6 py-3.5 rounded-xl border border-slate-700 bg-slate-800/50 hover:bg-slate-800 text-slate-200 font-medium transition-all">
                                 Conocer Más
@@ -410,7 +410,7 @@
                 <!-- Agenda Header -->
                 <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 pb-6 border-b border-slate-800 gap-6">
                     <div>
-                        <h2 class="text-3xl sm:text-4xl font-bold font-serif text-white">Agenda 2027</h2>
+                        <h2 class="text-3xl sm:text-4xl font-bold font-serif text-white">Agenda</h2>
                         <p class="text-slate-400 text-sm mt-1">Consulta la programación oficial de la iglesia para este año.</p>
                     </div>
 
@@ -572,7 +572,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left flex flex-col sm:flex-row justify-between items-center gap-6">
             <div>
                 <span class="text-lg font-bold text-white tracking-tight">IPUC <span class="text-amber-400">OCTAVA SEDE</span></span>
-                <p class="text-xs text-slate-500 mt-1">Ibagué, Tolima © 2027. Todos los derechos reservados.</p>
+                <p class="text-xs text-slate-500 mt-1">by jhon arias© 2027. Todos los derechos reservados.</p>
             </div>
             <div class="flex space-x-6 text-slate-400">
                 <a href="https://www.facebook.com/IpucTriunfoIbague8" target="_blank" class="hover:text-amber-400 transition"><i class="fa-brands fa-facebook text-lg"></i></a>
@@ -621,7 +621,7 @@
                     <form @submit.prevent="saveEvent()" class="p-6 space-y-4">
                         <div>
                             <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Título del Evento</label>
-                            <input type="text" x-model="activeEvent.title" required placeholder="Ej: Culto Especial de Jóvenes" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-slate-100 text-sm focus:outline-none focus:border-amber-400">
+                            <input type="text" x-model="activeEvent.title" required placeholder="a cargo de que comite" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-slate-100 text-sm focus:outline-none focus:border-amber-400">
                         </div>
 
                         <div class="grid grid-cols-2 gap-4">
@@ -647,6 +647,8 @@
                                 <option value="Urgente">rayos de luz</option>
                                 <option value="Urgente">dia misionero</option>
                                 <option value="Urgente">ofrenda especial</option>
+                                <option value="Urgente">fogata</option>
+                                <option value="Urgente">concierto</option>
                                 <option value="Urgente">asamblea general</option>
                                 <option value="Urgente">evento importante</option>
                                 <option value="Urgente">escuela dominical</option>
@@ -699,13 +701,13 @@
         <span class="text-sm font-medium" x-text="toast.message"></span>
     </div>
 
-    <!-- ALPINE LOGIC -->
+   <!-- ALPINE LOGIC -->
     <script>
         function appData() {
             return {
                 mobileMenuOpen: false,
-                currentYear: 2027,
-                currentMonth: 0,
+                currentYear: new Date().getFullYear(),
+                currentMonth: new Date().getMonth(),
                 months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
                 calendarDays: [],
                 events: [],
@@ -714,13 +716,13 @@
                 showAdminLogin: false,
                 adminPasswordInput: '',
                 showEventModal: false,
-                activeEvent: { id: null, title: '', date: '', time: '10:00', category: 'Institucional', description: '' },
+                activeEvent: { id: null, title: '', date: '', time: '10:00 AM', category: 'Institucional', description: '' },
                 toast: { show: false, message: '' },
 
                 initApp() {
                     const today = new Date();
-                    this.currentYear = 2027;
-                    this.currentMonth = today.getFullYear() === 2027 ? today.getMonth() : 0;
+                    this.currentYear = today.getFullYear();
+                    this.currentMonth = today.getMonth();
                     this.loadEvents();
                     this.renderCalendar();
                 },
@@ -831,8 +833,8 @@
 
                 goToToday() {
                     const today = new Date();
-                    this.currentYear = 2027;
-                    this.currentMonth = today.getFullYear() === 2027 ? today.getMonth() : 0;
+                    this.currentYear = today.getFullYear();
+                    this.currentMonth = today.getMonth();
                     this.renderCalendar();
                 },
 
@@ -862,19 +864,22 @@
 
                 openModalForDay(day) {
                     if (!this.isAdmin) return;
-                    this.activeEvent = { id: null, title: '', date: day.dateString, time: '10:00', category: 'Institucional', description: '' };
+                    this.activeEvent = { id: null, title: '', date: day.dateString, time: '10:00 AM', category: 'Institucional', description: '' };
                     this.showEventModal = true;
                 },
 
                 openModalForNewEvent() {
                     if (!this.isAdmin) return;
-                    const todayStr = '2027-01-01';
-                    this.activeEvent = { id: null, title: '', date: todayStr, time: '10:00', category: 'Institucional', description: '' };
+                    const todayObj = new Date();
+                    const todayStr = `${todayObj.getFullYear()}-${String(todayObj.getMonth() + 1).padStart(2, '0')}-${String(todayObj.getDate()).padStart(2, '0')}`;
+                    this.activeEvent = { id: null, title: '', date: todayStr, time: '10:00 AM', category: 'Institucional', description: '' };
                     this.showEventModal = true;
                 },
 
                 viewOrEditEvent(event) {
                     this.activeEvent = JSON.parse(JSON.stringify(event));
+                    // Convertir formato de hora si viene en militar por datos antiguos
+                    this.activeEvent.time = this.formatTimeTo12h(this.activeEvent.time);
                     this.showEventModal = true;
                 },
 
@@ -882,8 +887,22 @@
                     this.showEventModal = false;
                 },
 
+                // Función auxiliar para convertir formato HH:MM a AM/PM
+                formatTimeTo12h(timeStr) {
+                    if (!timeStr || timeStr.includes('M')) return timeStr || '10:00 AM';
+                    const [hourStr, minuteStr] = timeStr.split(':');
+                    let hour = parseInt(hourStr, 10);
+                    const ampm = hour >= 12 ? 'PM' : 'AM';
+                    hour = hour % 12;
+                    hour = hour ? hour : 12; // La hora 0 se convierte en 12
+                    return `${hour}:${minuteStr || '00'} ${ampm}`;
+                },
+
                 saveEvent() {
                     if (!this.isAdmin) return;
+                    // Asegurar formato 12h antes de guardar
+                    this.activeEvent.time = this.formatTimeTo12h(this.activeEvent.time);
+
                     if (this.activeEvent.id) {
                         const index = this.events.findIndex(e => e.id === this.activeEvent.id);
                         if (index !== -1) {
