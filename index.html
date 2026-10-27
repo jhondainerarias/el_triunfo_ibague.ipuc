@@ -606,16 +606,158 @@
     </div>
 
     <!-- MODAL PARA GESTIÓN DE EVENTOS -->
-    <div x-show="showEventModal" x-cloak class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-        <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-            <div @click="closeModal()" class="fixed inset-0 bg-slate-950/75 backdrop-blur-sm transition-opacity"></div>
-            <span class="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
+    <!-- MODAL DE EVENTOS TIPO POSTER PUBLICITARIO / ANUNCIO -->
+<div x-show="showEventModal" x-cloak class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <!-- Fondo con desenfoque de cristal (Backdrop Blur) -->
+        <div @click="closeModal()" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md transition-opacity"></div>
+        <span class="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
 
-            <div class="inline-block align-bottom bg-slate-900 rounded-2xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full border border-slate-700">
-                <div class="bg-slate-800/80 px-6 py-4 border-b border-slate-700 flex justify-between items-center">
-                    <h3 class="text-lg font-bold text-white" x-text="activeEvent.id ? 'Editar Evento' : 'Nuevo Evento Institucional'"></h3>
-                    <button @click="closeModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+        <!-- Tarjeta Principal del Modal -->
+        <div class="inline-block align-bottom bg-slate-900 rounded-3xl text-left overflow-hidden shadow-2xl shadow-black/80 transform transition-all sm:my-8 sm:align-middle sm:max-w-md sm:w-full border border-amber-500/30 relative">
+            
+            <!-- Botón de Cierre Flotante Superior -->
+            <button @click="closeModal()" class="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-slate-900/80 text-slate-300 hover:text-white hover:bg-slate-800 transition flex items-center justify-center border border-slate-700/60 shadow-lg">
+                <i class="fa-solid fa-xmark text-base"></i>
+            </button>
+
+            <!-- VISTA PUBLICITARIA TIPO ANUNCIO (PARA USUARIOS / VISITANTES) -->
+            <template x-if="!isAdmin">
+                <div class="relative overflow-hidden">
+                    
+                    <!-- BANNER POSTER ILUSTRATIVO (CABECERA DE ANUNCIO) -->
+                    <div class="relative bg-gradient-to-br from-navy-900 via-slate-900 to-amber-950/60 pt-10 pb-8 px-6 text-center border-b border-amber-500/20">
+                        <!-- Destello decorativo de fondo -->
+                        <div class="absolute -top-12 left-1/2 -translate-x-1/2 w-48 h-48 bg-amber-500/20 rounded-full blur-3xl pointer-events-none"></div>
+                        
+                        <!-- Emblem / Ícono del Poster -->
+                        <div class="w-16 h-16 mx-auto mb-3 rounded-2xl bg-gradient-to-tr from-amber-500 to-amber-300 text-navy-900 flex items-center justify-center text-2xl font-bold shadow-lg shadow-amber-500/20 border border-amber-300/50">
+                           <img src="logo1.png" alt="Logo" class="w-full h-full object-cover">
+                        </div>
+
+                        <!-- Categoría Destacada -->
+                        <span class="inline-block px-3.5 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider shadow-sm mb-2" :class="getCategoryBadge(activeEvent.category)" x-text="activeEvent.category"></span>
+                        
+                        <!-- Título del Evento Publicitario -->
+                         <p class="text-xs text-amber-300/80 font-medium tracking-widest uppercase mt-1">comite a cargo del este evento</p>
+                           
+                     <br>   <h3 class="text-2xl sm:text-3xl font-extrabold font-serif text-white tracking-tight leading-snug mt-1" x-text="activeEvent.title"></h3>
+                        </div>
+
+                    <!-- CUERPO DE LA TARJETA / INFORMACIÓN DEL EVENTO -->
+                    <div class="p-6 space-y-5 bg-slate-900/90">
+                        
+                        <!-- TARJETA DE FECHA Y HORA (ESTILO TICKET/INVITACIÓN) -->
+                        <div class="grid grid-cols-2 gap-3 bg-slate-800/80 border border-slate-700/80 rounded-2xl p-4 shadow-inner">
+                            <div class="flex items-center space-x-3 border-r border-slate-700/60 pr-2">
+                                <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-lg">
+                                    <i class="fa-regular fa-calendar-days"></i>
+                                </div>
+                                <div>
+                                    <span class="block text-[10px] uppercase font-bold text-slate-400 tracking-wider">Fecha</span>
+                                    <span class="text-xs sm:text-sm font-bold text-slate-100" x-text="formatDateHuman(activeEvent.date)"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center space-x-3 pl-1">
+                                <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-lg">
+                                    <i class="fa-regular fa-clock"></i>
+                                </div>
+                                <div>
+                                    <span class="block text-[10px] uppercase font-bold text-slate-400 tracking-wider">Hora</span>
+                                    <span class="text-xs sm:text-sm font-bold text-slate-100" x-text="activeEvent.time"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- DESCRIPCIÓN Y DETALLES DEL EVENTO -->
+                        <div class="bg-slate-800/40 rounded-2xl p-4 border border-slate-800">
+                            <h4 class="text-xs font-bold uppercase text-amber-400 tracking-wider mb-2 flex items-center gap-1.5">
+                                <i class="fa-solid fa-circle-info"></i> mas detalles
+                            </h4>
+                            <p class="text-sm text-slate-300 leading-relaxed italic font-light" x-text="activeEvent.description || 'Te invitamos cordialmente a acompañarnos en este importante evento.'"></p>
+                        </div>
+
+                        <!-- MENSAJE INVITACIONAL / FOOTER DE LA TARJETA -->
+                        <div class="text-center pt-2">
+                            <p class="text-xs text-slate-400 font-medium">
+                                <span class="text-slate-300">mejor es un dia en tu casa, que mil fuera de ella </span>
+                            </p>
+                            <button @click="closeModal()" class="mt-4 w-full py-3 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-navy-900 font-bold text-sm shadow-lg shadow-amber-500/20 hover:brightness-110 active:scale-[0.98] transition">
+                                fin
+                            </button>
+                        </div>
+                    </div>
                 </div>
+            </template>
+
+            <!-- VISTA DE FORMULARIO DE EDICIÓN (SOLO EN MODO ADMINISTRADOR) -->
+            <template x-if="isAdmin">
+                <div>
+                    <div class="bg-slate-800/90 px-6 py-4 border-b border-slate-700 flex justify-between items-center">
+                        <h3 class="text-lg font-bold text-amber-400 flex items-center gap-2">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                            <span x-text="activeEvent.id ? 'Editar Evento' : 'crear Nuevo Evento'"></span>
+                        </h3>
+                    </div>
+
+                    <form @submit.prevent="saveEvent()" class="p-6 space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Título del Evento</label>
+                            <input type="text" x-model="activeEvent.title" required placeholder="que evento se celebra" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-slate-100 text-sm focus:outline-none focus:border-amber-400">
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Fecha</label>
+                                <input type="date" x-model="activeEvent.date" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-slate-100 text-sm focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Hora</label>
+                                <input type="text" x-model="activeEvent.time" required placeholder="Ej: 6:00 PM" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-slate-100 text-sm focus:outline-none">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Categoría</label>
+                            <select x-model="activeEvent.category" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2.5 text-slate-100 text-sm focus:outline-none">
+                                <option value="culto">Culto</option>
+                                <option value="evento">Evento</option>
+                                <option value="capacitación">Capacitación</option>
+                                <option value="confraternidad">Confraternidad</option>
+                                <option value="especial">Especial</option>
+                                <option value="gavillas">Gavillas</option>
+                                <option value="rayos de luz">Rayos de Luz</option>
+                                <option value="misiones">Misiones</option>
+                                <option value="concierto">Concierto</option>
+                                <option value="convocatoria">Convocatoria</option>
+                                <option value="e-d">Escuela Dominical (E-D)</option>
+                                <option value="general">General</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Descripción / Notas del Anuncio</label>
+                            <textarea x-model="activeEvent.description" rows="3" placeholder="Añade detalles para la feligresía..." class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2 text-slate-100 text-sm focus:outline-none"></textarea>
+                        </div>
+
+                        <div class="pt-4 flex items-center justify-between border-t border-slate-800">
+                            <template x-if="activeEvent.id">
+                                <button type="button" @click="deleteEvent(activeEvent.id)" class="text-rose-400 hover:text-rose-300 text-xs font-bold flex items-center gap-1">
+                                    <i class="fa-solid fa-trash"></i> Eliminar
+                                </button>
+                            </template>
+                            <div class="flex space-x-3 ml-auto">
+                                <button type="button" @click="closeModal()" class="px-4 py-2 rounded-xl bg-slate-800 border border-slate-700 text-slate-300 text-xs font-bold">Cancelar</button>
+                                <button type="submit" class="px-5 py-2 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 text-navy-900 text-xs font-bold shadow-md">Guardar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </template>
+        </div>
+    </div>
+</div>
 
                 <template x-if="isAdmin">
                     <form @submit.prevent="saveEvent()" class="p-6 space-y-4">
@@ -638,20 +780,21 @@
                         <div>
                             <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Categoría</label>
                            <select x-model="activeEvent.category" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2.5 text-slate-100 text-sm focus:outline-none">
-                                <option value="Reunión">culto</option>
-                                <option value="Institucional">Integracion</option>
+                                <option value="culto">culto</option>
+                                <option value="evento">Integracion</option>
                                 <option value="Capacitación">Capacitación</option>
-                                <option value="Recordatorio">confraternidad</option>
-                                <option value="Urgente">culto misionero</option>
-                                <option value="Urgente">gavillas</option>
-                                <option value="Urgente">rayos de luz</option>
-                                <option value="Urgente">dia misionero</option>
-                                <option value="Urgente">ofrenda especial</option>
-                                <option value="Urgente">fogata</option>
-                                <option value="Urgente">concierto</option>
-                                <option value="Urgente">asamblea general</option>
-                                <option value="Urgente">evento importante</option>
-                                <option value="Urgente">escuela dominical</option>
+                                <option value="confraternidad">confraternidad</option>
+                                <option value="especial">culto misionero</option>
+                                <option value="gavillas">gavillas</option>
+                                <option value="rayos de luz">rayos de luz</option>
+                                <option value="misiones">dia misionero</option>
+                                <option value="evento">ofrenda especial</option>
+                                <option value="evento">fogata</option>
+                                <option value="concierto">concierto</option>
+                                <option value="convocatoria">asamblea general</option>
+                                <option value="culto">evento importante</option>
+                                <option value="E-D">escuela dominical</option>
+                                <option value="general">santa cena</option>
                                 
                             </select>
                         </div>
@@ -926,15 +1069,39 @@
                     this.showToast('Evento eliminado de la agenda');
                 },
 
-                getCategoryClasses(category) {
-                    switch (category) {
-                        case 'Institucional': return 'bg-amber-500/20 text-amber-300 border-amber-500/30';
-                        case 'Reunión': return 'bg-blue-500/20 text-blue-300 border-blue-500/30';
-                        case 'Capacitación': return 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30';
-                        case 'Urgente': return 'bg-rose-500/20 text-rose-300 border-rose-500/30';
-                        default: return 'bg-slate-700 text-slate-300 border-slate-600';
-                    }
-                },
+
+
+
+
+                getCategoryClasses(category) {switch (category) {
+        case 'culto': 
+            return 'bg-blue-500/20 text-blue-300 border-blue-500/30';
+        case 'evento': 
+            return 'bg-amber-500/20 text-amber-300 border-amber-500/30';
+        case 'capacitación': 
+            return 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30';
+        case 'confraternidad': 
+            return 'bg-purple-500/20 text-purple-300 border-purple-500/30';
+        case 'especial': 
+            return 'bg-rose-500/20 text-rose-300 border-rose-500/30';
+        case 'gavillas': 
+            return 'bg-yellow-500/20 text-yellow-300 border-yellow-500/30';
+        case 'rayos de luz': 
+            return 'bg-orange-500/20 text-orange-300 border-orange-500/30';
+        case 'misiones': 
+            return 'bg-teal-500/20 text-teal-300 border-teal-500/30';
+        case 'concierto': 
+            return 'bg-indigo-500/20 text-indigo-300 border-indigo-500/30';
+        case 'convocatoria': 
+            return 'bg-cyan-500/20 text-cyan-300 border-cyan-500/30';
+        case 'e-d': 
+            return 'bg-lime-500/20 text-lime-300 border-lime-500/30';
+        case 'general': 
+            return 'bg-sky-500/20 text-sky-300 border-sky-500/30';
+        default: 
+            return 'bg-slate-700 text-slate-300 border-slate-600';
+    }
+},
 
                 getCategoryBadge(category) {
                     return this.getCategoryClasses(category);
