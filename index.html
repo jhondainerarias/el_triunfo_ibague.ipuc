@@ -3,18 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>App-IPUC Octava Sede</title>
+    <title>Agenda Virtual - IPUC Octava Sede</title>
+    
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <!-- Alpine.js para la reactividad -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
     <!-- FontAwesome para Iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <!-- Google Fonts Inter y Playfair Display -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
-    
+
     <!-- PWA Web App Manifest -->
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#0B192C">
@@ -23,6 +27,7 @@
     <meta name="apple-mobile-web-app-title" content="IPUC 8 Sede">
     <link rel="apple-touch-icon" href="logo1.png">
 
+  
     <!-- CONFIGURACIÓN UNIFICADA DE TAILWIND -->
     <script>
         tailwind.config = {
@@ -30,14 +35,16 @@
                 extend: {
                     colors: {
                         navy: {
+                        
                             800: '#0B192C',
-                            900: '#030811',
-                            950: '#02050A',
+                            900: '#0D4A70',
+                            950: '#020106',
+                            
                         },
                         gold: {
                             400: 'rgba(255, 255, 255, 0.85)',
                             500: '#f1f1f1',
-                            600: '#d97706',
+                            600: '#fafa02',
                         }
                     },
                     fontFamily: {
@@ -107,12 +114,28 @@
             <div class="flex items-center justify-between h-20">
                 <!-- Logo -->
                 <a href="#inicio" class="flex items-center space-x-3 group">
-                    <div class="w-10 h-10 rounded-lg bg-gradient-to-tr from-gold-500 to-amber-300 flex items-center justify-center text-navy-900 font-bold text-xl shadow-lg shadow-gold-500/20 group-hover:scale-105 transition-transform overflow-hidden">
+                    <div class="w-26 h-12 rounded-lg bg-gradient-to-tr from-gold-500 to-amber-300 flex items-center justify-center text-navy-900 font-bold text-xl shadow-lg shadow-gold-500/20 group-hover:scale-105 transition-transform overflow-hidden">
                         <img src="logo1.png" alt="Logo" class="w-full h-full object-cover">
                     </div>
                     <div>
                         <span class="text-xl font-bold tracking-tight text-white block">IPUC <span class="text-amber-400 font-light">OCTAVA SEDE</span></span>
-                        <span class="text-[10px] text-slate-400 uppercase tracking-widest block -mt-1">BARRIO EL TRIUNFO IBAGUE TOLIMA</span>
+                     <style>
+  @keyframes marquee {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+  }
+  .animate-marquee-custom {
+    animation: marquee 12s linear infinite;
+  }
+</style>
+
+<div class="w-full overflow-hidden whitespace-nowrap">
+  <div class="inline-block animate-marquee-custom">
+    <span class="text-[10px] text-slate-400 uppercase tracking-widest block -mt-1">
+      BARRIO EL TRIUNFO IBAGUE TOLIMA
+    </span>
+  </div>
+</div>
                     </div>
                 </a>
 
@@ -127,7 +150,7 @@
                         <div class="glow-border-beam"></div>
                         <a href="#agenda" class="relative z-10 px-5 py-2.5 rounded-full bg-navy-900 text-amber-300 hover:text-white transition-all font-semibold flex items-center space-x-2">
                             <i class="fa-regular fa-calendar-days text-amber-400"></i>
-                            <span>Agenda </span>
+                            <span>Agenda Virtual</span>
                         </a>
                     </div>
 
@@ -160,14 +183,13 @@
             <div class="pt-2">
                 <a href="#agenda" @click="mobileMenuOpen = false" class="w-full flex items-center justify-center space-x-2 px-4 py-3 rounded-full bg-gradient-to-r from-amber-500/20 to-amber-400/10 text-amber-300 border border-amber-500/50 hover:bg-amber-500 hover:text-navy-900 transition-all font-semibold shadow-lg shadow-amber-500/10">
                     <i class="fa-regular fa-calendar-days text-amber-400"></i>
-                    <span>Agenda</span>
+                    <span>Agenda Virtual</span>
                 </a>
             </div>
 
-           
 
             <button @click="mobileMenuOpen = false; openAdminLoginModal()" class="w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-800 flex items-center gap-2">
-                <i class="fa-solid fa-lock text-amber-400"></i> Administrador
+                <i class="fa-solid fa-lock text-amber-400"></i> Panel Administrador
             </button>
         </div>
     </header>
@@ -295,7 +317,13 @@
             </div>
         </section>
 
-
+        <!-- 3. SERVICIOS SECTION -->
+        <section id="servicios" class="py-20 bg-white border-t border-b border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-3xl sm:text-4xl font-bold font-serif text-navy-900"> Áreas de la Iglesia</h2>
+                    <div class="w-16 h-1 bg-amber-500 mx-auto mt-4 rounded-full"></div>
+                </div>
 
                 <!-- 3. SERVICIOS SECTION -->
         <section id="servicios" class="py-20 bg-white border-t border-b border-slate-200">
@@ -328,7 +356,7 @@
                     <div class="bg-slate-50 rounded-2xl overflow-hidden shadow-sm border border-slate-200/80 hover:shadow-md transition">
                         <img src="4.png" alt="Expansión" class="w-full h-48 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x400/0B192C/FFF?text=Expansion';">
                         <div class="p-6">
-                            <h4 class="font-bold text-lg text-navy-900 mb-2">EXPANSIÓN/MISIONES</h4>
+                            <h4 class="font-bold text-lg text-navy-900 mb-2">EXPANSIÓN</h4>
                             <p class="text-slate-600 text-sm">Enfocados en el cumplimiento de la misión evangelística y la predicación del evangelio.</p>
                         </div>
                     </div>
@@ -337,7 +365,7 @@
                     <div class="bg-slate-50 rounded-2xl overflow-hidden shadow-sm border border-slate-200/80 hover:shadow-md transition">
                         <img src="damas.png" alt="Damas" class="w-full h-48 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x400/0B192C/FFF?text=Damas';">
                         <div class="p-6">
-                            <h4 class="font-bold text-lg text-navy-900 mb-2">DAMAS</h4>
+                            <h4 class="font-bold text-lg text-navy-900 mb-2">DAMAS (SOCIEDAD DE DORCAS)</h4>
                             <p class="text-slate-600 text-sm">Espacios de oración, ayuno y comunión enfocados en el liderazgo espiritual y obra social de la mujer.</p>
                         </div>
                     </div>
@@ -346,7 +374,7 @@
                     <div class="bg-slate-50 rounded-2xl overflow-hidden shadow-sm border border-slate-200/80 hover:shadow-md transition">
                         <img src="niños.png" alt="Niños" class="w-full h-48 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x400/0B192C/FFF?text=Ninos';">
                         <div class="p-6">
-                            <h4 class="font-bold text-lg text-navy-900 mb-2">EDUCACION CRISTIANA/NIÑOS</h4>
+                            <h4 class="font-bold text-lg text-navy-900 mb-2">ESCUELA DOMINICAL / NIÑOS</h4>
                             <p class="text-slate-600 text-sm">Enseñanza bíblica creativa y formación en valores cristianos para guiar a los más pequeños en la fe.</p>
                         </div>
                     </div>
@@ -355,7 +383,7 @@
                     <div class="bg-slate-50 rounded-2xl overflow-hidden shadow-sm border border-slate-200/80 hover:shadow-md transition">
                         <img src="musica.png" alt="Músicos" class="w-full h-48 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x400/0B192C/FFF?text=Musicos';">
                         <div class="p-6">
-                            <h4 class="font-bold text-lg text-navy-900 mb-2">MÚSICOS Y CANTANTES</h4>
+                            <h4 class="font-bold text-lg text-navy-900 mb-2">MÚSICOS Y CORO</h4>
                             <p class="text-slate-600 text-sm">Ministerio de alabanza y adoración encargado de exaltar el nombre del Señor a través de la música y el canto.</p>
                         </div>
                     </div>
@@ -365,7 +393,7 @@
                         <img src="oracion.png" alt="Oración" class="w-full h-48 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x400/0B192C/FFF?text=Oracion';">
                         <div class="p-6">
                             <h4 class="font-bold text-lg text-navy-900 mb-2">MINISTERIO DE ORACIÓN</h4>
-                            <p class="text-slate-600 text-sm">Vigilias, cadenas de intercesión y momentos dedicados a buscar el respaldo y la respuesta de Dios en unidad.</p>
+                            <p class="text-slate-600 text-sm">Vigilias, cadenas de intercesión y momentos dedicados a buscar el respaldo y la dirección de Dios en unidad.</p>
                         </div>
                     </div>
                 </div>
@@ -429,6 +457,7 @@
 
                             <!-- Selector de Año -->
                             <select x-model.number="currentYear" @change="renderCalendar()" class="bg-slate-900 text-slate-300 font-bold text-lg rounded-xl border border-slate-700 px-3 py-2 focus:outline-none cursor-pointer">
+                                <option value="2026">2026</option>
                                 <option value="2027">2027</option>
                             </select>
                         </div>
@@ -605,7 +634,7 @@
 
                         <div>
                             <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Categoría</label>
-                            <select x-model="activeEvent.category" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2.5 text-slate-100 text-sm focus:outline-none">
+                           <select x-model="activeEvent.category" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2.5 text-slate-100 text-sm focus:outline-none">
                                 <option value="Reunión">culto</option>
                                 <option value="Institucional">Integracion</option>
                                 <option value="Capacitación">Capacitación</option>
@@ -621,6 +650,7 @@
                                 
                             </select>
                         </div>
+
                         <div>
                             <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Descripción / Notas</label>
                             <textarea x-model="activeEvent.description" rows="3" placeholder="Detalles..." class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2 text-slate-100 text-sm focus:outline-none"></textarea>
