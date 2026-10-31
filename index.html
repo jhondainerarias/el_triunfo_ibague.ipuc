@@ -6,7 +6,7 @@
 <meta http-equiv="Expires" content="0">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agenda Virtual - IPUC Octava Sede</title>
+    <title>app-IPUC Octava Sede</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -142,7 +142,7 @@
 
                 <!-- Desktop Nav Navigation -->
                 <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
-                    <a href="comites.html" class="text-slate-300 hover:text-amber-400 transition-colors">Comités 2027</a>
+                    <a href="bot.html" class="text-slate-300 hover:text-amber-400 transition-colors">asistente virtual</a>
                     <a href="#nosotros" class="text-slate-300 hover:text-amber-400 transition-colors">Nosotros</a>
                     <a href="#servicios" class="text-slate-300 hover:text-amber-400 transition-colors">Servicios</a>
                     
@@ -176,7 +176,7 @@
 
        <!-- Mobile Navigation Drawer -->
         <div x-show="mobileMenuOpen" x-cloak x-transition class="md:hidden bg-navy-900 border-b border-slate-800 px-4 pt-4 pb-6 space-y-3">
-            <a href="comites.html" @click="mobileMenuOpen = false" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800">Comités 2027</a>
+            <a href="bot.html" @click="mobileMenuOpen = false" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800">asistente virtual</a>
             <a href="#nosotros" @click="mobileMenuOpen = false" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800">Nosotros</a>
             <a href="#servicios" @click="mobileMenuOpen = false" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800">Servicios</a>
             
@@ -434,7 +434,7 @@
                 <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 pb-6 border-b border-slate-800 gap-6">
                     <div>
                         <h2 class="text-3xl sm:text-4xl font-bold font-serif text-white">Agenda</h2>
-                        <p class="text-slate-400 text-sm mt-1"> toca los dias del calendario yConsulta los eventos a realizar.</p>
+                        <p class="text-slate-400 text-sm mt-1">consulta proximos eventos.</p>
                     </div>
 
                     <!-- Filter / Quick Search Bar & Admin Controls -->
@@ -623,7 +623,7 @@
             ¡Comunícate con nosotros!
         </span>
         
-        <a :href="`https://wa.me/${whatsappPhone}?text=${encodeURIComponent(whatsappMessage)}`" 
+        <a :href="`bot.html`" 
            target="_blank" 
            rel="noopener noreferrer" 
            aria-label="Contacto por WhatsApp" 
@@ -1228,3 +1228,4 @@
     </script>
 </body>
 </html>
+  
