@@ -38,11 +38,9 @@
                 extend: {
                     colors: {
                         navy: {
-                        
                             800: '#0B192C',
                             900: '#0D4A70',
                             950: '#020106',
-                            
                         },
                         gold: {
                             400: 'rgba(255, 255, 255, 0.85)',
@@ -109,7 +107,7 @@
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased flex flex-col min-h-screen" x-data="appData()" x-init="initApp()">
+<body class="bg-slate-50 text-slate-800 font-sans antialiased flex flex-col min-h-screen relative" x-data="appData()" x-init="initApp()">
 
     <!-- HEADER / NAVIGATION (DISEÑO MODERNO Y ELEGANTE) -->
     <header class="sticky top-0 z-40 w-full bg-navy-900/95 text-white backdrop-blur border-b border-slate-800 transition-all duration-300 shadow-xl">
@@ -122,23 +120,23 @@
                     </div>
                     <div>
                         <span class="text-xl font-bold tracking-tight text-white block">IPUC <span class="text-amber-400 font-light">OCTAVA SEDE</span></span>
-                     <style>
-  @keyframes marquee {
-    0% { transform: translateX(100%); }
-    100% { transform: translateX(-100%); }
-  }
-  .animate-marquee-custom {
-    animation: marquee 12s linear infinite;
-  }
-</style>
+                        <style>
+                          @keyframes marquee {
+                            0% { transform: translateX(100%); }
+                            100% { transform: translateX(-100%); }
+                          }
+                          .animate-marquee-custom {
+                            animation: marquee 12s linear infinite;
+                          }
+                        </style>
 
-<div class="w-full overflow-hidden whitespace-nowrap">
-  <div class="inline-block animate-marquee-custom">
-    <span class="text-[10px] text-slate-400 uppercase tracking-widest block -mt-1">
-      BARRIO EL TRIUNFO IBAGUE TOLIMA
-    </span>
-  </div>
-</div>
+                        <div class="w-full overflow-hidden whitespace-nowrap">
+                          <div class="inline-block animate-marquee-custom">
+                            <span class="text-[10px] text-slate-400 uppercase tracking-widest block -mt-1">
+                              BARRIO EL TRIUNFO IBAGUE TOLIMA
+                            </span>
+                          </div>
+                        </div>
                     </div>
                 </a>
 
@@ -182,14 +180,12 @@
             <a href="#nosotros" @click="mobileMenuOpen = false" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800">Nosotros</a>
             <a href="#servicios" @click="mobileMenuOpen = false" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800">Servicios</a>
             
-            <!-- Botón móvil de Agenda Virtual con diseño elegante y sin desbordes -->
             <div class="pt-2">
                 <a href="#agenda" @click="mobileMenuOpen = false" class="w-full flex items-center justify-center space-x-2 px-4 py-3 rounded-full bg-gradient-to-r from-amber-500/20 to-amber-400/10 text-amber-300 border border-amber-500/50 hover:bg-amber-500 hover:text-navy-900 transition-all font-semibold shadow-lg shadow-amber-500/10">
                     <i class="fa-regular fa-calendar-days text-amber-400"></i>
                     <span>Agenda Virtual</span>
                 </a>
             </div>
-
 
             <button @click="mobileMenuOpen = false; openAdminLoginModal()" class="w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-800 flex items-center gap-2">
                 <i class="fa-solid fa-lock text-amber-400"></i> Panel Administrador
@@ -213,24 +209,64 @@
                         </h1>
 
                         <h5 class="text-xl sm:text-2xl font-semibold tracking-tight font-sans text-slate-300">
+                          <span class="text-amber-400 font-bold">2027</span>
                         </h5>
                         <p class="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light italic">
                           "¡Ved qué bueno y qué delicioso es habitar los hermanos juntos en armonía!" <span class="not-italic text-amber-400 font-medium">— Salmo 133:1</span>
                         </p>
                         <div class="pt-4 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                             <a href="#agenda" class="inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 text-navy-900 font-bold hover:shadow-lg hover:shadow-amber-500/25 transition-all transform hover:-translate-y-0.5">
-                                <i class="fa-solid fa-calendar-check mr-2"></i> eventos a realizar
+                                <i class="fa-solid fa-calendar-check mr-2"></i> Aquí encuentras la programación del año
                             </a>
                             <a href="#nosotros" class="inline-flex items-center justify-center px-6 py-3.5 rounded-xl border border-slate-700 bg-slate-800/50 hover:bg-slate-800 text-slate-200 font-medium transition-all">
                                 Conocer Más
                             </a>
                         </div>
                     </div>
-                    <div class="lg:col-span-5 relative">
+
+                    <!-- 1. CAMBIO: CARRUSEL RESPONSIVO Y ANIMADO DE IMÁGENES -->
+                    <div class="lg:col-span-5 relative" 
+                         @mouseenter="stopCarousel()" 
+                         @mouseleave="startCarousel()">
                         <div class="relative mx-auto max-w-md lg:max-w-none">
-                            <div class="relative rounded-2xl overflow-hidden border border-slate-700/60 shadow-2xl shadow-navy-950">
-                                <img src="2.png" alt="Edificio Institucional" class="w-full h-80 sm:h-96 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/800x600/0B192C/FFF?text=IPUC';">
-                                <div class="absolute inset-0 bg-gradient-to-t from-navy-900 via-transparent to-transparent"></div>
+                            <div class="relative rounded-2xl overflow-hidden border border-slate-700/60 shadow-2xl shadow-navy-950 aspect-[4/3] sm:h-96">
+                                <template x-for="(image, index) in carouselImages" :key="index">
+                                    <div x-show="currentSlide === index"
+                                         x-transition:enter="transition opacity duration-700 ease-out transform scale-100"
+                                         x-transition:enter-start="opacity-0 scale-105"
+                                         x-transition:enter-end="opacity-100 scale-100"
+                                         x-transition:leave="transition opacity duration-500 ease-in"
+                                         x-transition:leave-start="opacity-100"
+                                         x-transition:leave-end="opacity-0"
+                                         class="absolute inset-0 w-full h-full">
+                                        <img :src="image.src" 
+                                             :alt="image.alt" 
+                                             class="w-full h-full object-cover" 
+                                             :onerror="`this.onerror=null; this.src='${image.fallback}';`">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-navy-900 via-navy-900/20 to-transparent"></div>
+                                        <div x-show="image.title" class="absolute bottom-4 left-4 right-4 text-white text-sm font-medium bg-navy-950/60 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-slate-700/50">
+                                            <p x-text="image.title" class="truncate"></p>
+                                        </div>
+                                    </div>
+                                </template>
+
+                                <!-- Botones Anterior / Siguiente -->
+                                <button @click="prevSlide()" class="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-navy-950/60 hover:bg-amber-500 text-white hover:text-navy-900 transition flex items-center justify-center border border-slate-700/50 backdrop-blur">
+                                    <i class="fa-solid fa-chevron-left text-sm"></i>
+                                </button>
+                                <button @click="nextSlide()" class="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-navy-950/60 hover:bg-amber-500 text-white hover:text-navy-900 transition flex items-center justify-center border border-slate-700/50 backdrop-blur">
+                                    <i class="fa-solid fa-chevron-right text-sm"></i>
+                                </button>
+
+                                <!-- Indicadores (Dots) -->
+                                <div class="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 flex space-x-2">
+                                    <template x-for="(img, idx) in carouselImages" :key="idx">
+                                        <button @click="goToSlide(idx)" 
+                                                class="h-2 rounded-full transition-all duration-300"
+                                                :class="currentSlide === idx ? 'w-6 bg-amber-400' : 'w-2 bg-white/50 hover:bg-white'">
+                                        </button>
+                                    </template>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -238,7 +274,7 @@
             </div>
         </section>
 
-        <!-- 2. NOSOTROS SECTION (MEJORADA CON IMÁGENES TIPO LOGO EN LUGAR DE ICONOS) -->
+        <!-- 2. NOSOTROS SECTION -->
         <section id="nosotros" class="py-24 bg-slate-50">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-3xl mx-auto mb-16">
@@ -248,12 +284,10 @@
                 </div>
 
                 <div class="grid md:grid-cols-3 gap-8 lg:gap-10">
-                    
                     <!-- Misión -->
                     <div class="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-xl shadow-slate-200/50 hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group relative overflow-hidden">
                         <div class="absolute top-0 right-0 w-32 h-32 bg-amber-500/5 rounded-bl-full pointer-events-none"></div>
                         <div>
-                            <!-- Imagen tipo logo/emblema en lugar de icono plano -->
                             <div class="w-16 h-16 rounded-2xl bg-navy-900 p-2.5 shadow-md mb-6 group-hover:scale-105 transition-transform flex items-center justify-center border border-amber-500/30">
                                 <img src="mision.png" alt="Misión Logo" class="w-full h-full object-contain filter drop-shadow">
                             </div>
@@ -275,7 +309,6 @@
                     <div class="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-xl shadow-slate-200/50 hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group relative overflow-hidden">
                         <div class="absolute top-0 right-0 w-32 h-32 bg-amber-500/5 rounded-bl-full pointer-events-none"></div>
                         <div>
-                            <!-- Imagen tipo logo/emblema en lugar de icono plano -->
                             <div class="w-16 h-16 rounded-2xl bg-navy-900 p-2.5 shadow-md mb-6 group-hover:scale-105 transition-transform flex items-center justify-center border border-amber-500/30">
                                 <img src="vision.png" alt="Visión Logo" class="w-full h-full object-contain filter drop-shadow">
                             </div>
@@ -297,7 +330,6 @@
                     <div class="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-xl shadow-slate-200/50 hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group relative overflow-hidden">
                         <div class="absolute top-0 right-0 w-32 h-32 bg-amber-500/5 rounded-bl-full pointer-events-none"></div>
                         <div>
-                            <!-- Imagen tipo logo/emblema en lugar de icono plano -->
                             <div class="w-16 h-16 rounded-2xl bg-navy-900 p-2.5 shadow-md mb-6 group-hover:scale-105 transition-transform flex items-center justify-center border border-amber-500/30">
                                 <img src="valores.png" alt="Valores Logo" class="w-full h-full object-contain filter drop-shadow">
                             </div>
@@ -320,14 +352,6 @@
         </section>
 
         <!-- 3. SERVICIOS SECTION -->
-        <section id="servicios" class="py-20 bg-white border-t border-b border-slate-200">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center max-w-3xl mx-auto mb-16">
-                    <h2 class="text-3xl sm:text-4xl font-bold font-serif text-navy-900"> Áreas de la Iglesia</h2>
-                    <div class="w-16 h-1 bg-amber-500 mx-auto mt-4 rounded-full"></div>
-                </div>
-
-                <!-- 3. SERVICIOS SECTION -->
         <section id="servicios" class="py-20 bg-white border-t border-b border-slate-200">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-3xl mx-auto mb-16">
@@ -571,13 +595,45 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left flex flex-col sm:flex-row justify-between items-center gap-6">
             <div>
                 <span class="text-lg font-bold text-white tracking-tight">IPUC <span class="text-amber-400">OCTAVA SEDE</span></span>
-                <p class="text-xs text-slate-500 mt-1">by jhon arias© 2027. Todos los derechos reservados.</p>
+                <p class="text-xs text-slate-500 mt-1"> desing-jhon  dainer arias aria$oftware © 2026.</p>
             </div>
-            <div class="flex space-x-6 text-slate-400">
-                <a href="https://www.facebook.com/IpucTriunfoIbague8" target="_blank" class="hover:text-amber-400 transition"><i class="fa-brands fa-facebook text-lg"></i></a>
-            </div>
+           <!-- BOTÓN FLOTANTE DE FACEBOOK -->
+<div class="fixed bottom-6 right-24 z-50 flex items-center group">
+    <!-- Tooltip al pasar el mouse (opcional) -->
+    <span class="mr-3 bg-navy-900 text-white text-xs font-semibold px-3 py-1.5 rounded-xl shadow-xl border border-amber-500/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden sm:block whitespace-nowrap">
+        ¡Síguenos en Facebook!
+    </span>
+    
+    <!-- Enlace / Botón -->
+    <a href="https://www.facebook.com/IpucTriunfoIbague8" 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       aria-label="Facebook IPUC" 
+       class="flex items-center justify-center w-14 h-14 bg-navy-900 border border-slate-700/80 text-slate-300 hover:text-amber-400 hover:border-amber-400 rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-all duration-300">
+        <i class="fa-brands fa-facebook text-2xl"></i>
+    </a>
+</div>
         </div>
     </footer>
+
+    <!-- 2. CAMBIO: BOTÓN FLOTANTE PARA COMUNICACIÓN POR WHATSAPP -->
+    <div class="fixed bottom-6 right-6 z-50 flex items-center group">
+        <!-- Tooltip Informativo -->
+        <span class="mr-3 bg-navy-900 text-white text-xs font-semibold px-3 py-1.5 rounded-xl shadow-xl border border-amber-500/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden sm:block whitespace-nowrap">
+            ¡Comunícate con nosotros!
+        </span>
+        
+        <a :href="`https://wa.me/${whatsappPhone}?text=${encodeURIComponent(whatsappMessage)}`" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           aria-label="Contacto por WhatsApp" 
+           class="relative flex items-center justify-center w-14 h-14 bg-emerald-500 text-white rounded-full shadow-2xl shadow-emerald-500/50 hover:bg-emerald-600 hover:scale-110 active:scale-95 transition-all duration-300">
+            <!-- Efecto de onda de pulso radiante -->
+            <span class="absolute inset-0 rounded-full bg-emerald-500 animate-ping opacity-40"></span>
+            
+            <i class="fa-brands fa-whatsapp text-2xl relative z-10"></i>
+        </a>
+    </div>
 
     <!-- MODAL DE ACCESO ADMINISTRADOR -->
     <div x-show="showAdminLogin" x-cloak class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -605,232 +661,138 @@
     </div>
 
     <!-- MODAL PARA GESTIÓN DE EVENTOS -->
-    <!-- MODAL DE EVENTOS TIPO POSTER PUBLICITARIO / ANUNCIO -->
-<div x-show="showEventModal" x-cloak class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-    <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-        <!-- Fondo con desenfoque de cristal (Backdrop Blur) -->
-        <div @click="closeModal()" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md transition-opacity"></div>
-        <span class="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
+    <div x-show="showEventModal" x-cloak class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div @click="closeModal()" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md transition-opacity"></div>
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
 
-        <!-- Tarjeta Principal del Modal -->
-        <div class="inline-block align-bottom bg-slate-900 rounded-3xl text-left overflow-hidden shadow-2xl shadow-black/80 transform transition-all sm:my-8 sm:align-middle sm:max-w-md sm:w-full border border-amber-500/30 relative">
-            
-            <!-- Botón de Cierre Flotante Superior -->
-            <button @click="closeModal()" class="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-slate-900/80 text-slate-300 hover:text-white hover:bg-slate-800 transition flex items-center justify-center border border-slate-700/60 shadow-lg">
-                <i class="fa-solid fa-xmark text-base"></i>
-            </button>
+            <div class="inline-block align-bottom bg-slate-900 rounded-3xl text-left overflow-hidden shadow-2xl shadow-black/80 transform transition-all sm:my-8 sm:align-middle sm:max-w-md sm:w-full border border-amber-500/30 relative">
+                
+                <button @click="closeModal()" class="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-slate-900/80 text-slate-300 hover:text-white hover:bg-slate-800 transition flex items-center justify-center border border-slate-700/60 shadow-lg">
+                    <i class="fa-solid fa-xmark text-base"></i>
+                </button>
 
-            <!-- VISTA PUBLICITARIA TIPO ANUNCIO (PARA USUARIOS / VISITANTES) -->
-            <template x-if="!isAdmin">
-                <div class="relative overflow-hidden">
-                    
-                    <!-- BANNER POSTER ILUSTRATIVO (CABECERA DE ANUNCIO) -->
-                    <div class="relative bg-gradient-to-br from-navy-900 via-slate-900 to-amber-950/60 pt-10 pb-8 px-6 text-center border-b border-amber-500/20">
-                        <!-- Destello decorativo de fondo -->
-                        <div class="absolute -top-12 left-1/2 -translate-x-1/2 w-48 h-48 bg-amber-500/20 rounded-full blur-3xl pointer-events-none"></div>
-                        
-                        <!-- Emblem / Ícono del Poster -->
-                        <div class="w-16 h-16 mx-auto mb-3 rounded-2xl bg-gradient-to-tr from-amber-500 to-amber-300 text-navy-900 flex items-center justify-center text-2xl font-bold shadow-lg shadow-amber-500/20 border border-amber-300/50">
-                           <img src="logo1.png" alt="Logo" class="w-full h-full object-cover">
-                        </div>
-
-                        <!-- Categoría Destacada -->
-                        <span class="inline-block px-3.5 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider shadow-sm mb-2" :class="getCategoryBadge(activeEvent.category)" x-text="activeEvent.category"></span>
-                        
-                        <!-- Título del Evento Publicitario -->
-                         <p class="text-xs text-amber-300/80 font-medium tracking-widest uppercase mt-1">evento y comite a cargo</p>
-                           
-                     <br>   <h3 class="text-2xl sm:text-3xl font-extrabold font-serif text-white tracking-tight leading-snug mt-1" x-text="activeEvent.title"></h3>
-                        </div>
-
-                    <!-- CUERPO DE LA TARJETA / INFORMACIÓN DEL EVENTO -->
-                    <div class="p-6 space-y-5 bg-slate-900/90">
-                        
-                        <!-- TARJETA DE FECHA Y HORA (ESTILO TICKET/INVITACIÓN) -->
-                        <div class="grid grid-cols-2 gap-3 bg-slate-800/80 border border-slate-700/80 rounded-2xl p-4 shadow-inner">
-                            <div class="flex items-center space-x-3 border-r border-slate-700/60 pr-2">
-                                <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-lg">
-                                    <i class="fa-regular fa-calendar-days"></i>
-                                </div>
-                                <div>
-                                    <span class="block text-[10px] uppercase font-bold text-slate-400 tracking-wider">Fecha</span>
-                                    <span class="text-xs sm:text-sm font-bold text-slate-100" x-text="formatDateHuman(activeEvent.date)"></span>
-                                </div>
-                            </div>
+                <!-- VISTA PUBLICITARIA PARA USUARIOS -->
+                <template x-if="!isAdmin">
+                    <div class="relative overflow-hidden">
+                        <div class="relative bg-gradient-to-br from-navy-900 via-slate-900 to-amber-950/60 pt-10 pb-8 px-6 text-center border-b border-amber-500/20">
+                            <div class="absolute -top-12 left-1/2 -translate-x-1/2 w-48 h-48 bg-amber-500/20 rounded-full blur-3xl pointer-events-none"></div>
                             
-                            <div class="flex items-center space-x-3 pl-1">
-                                <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-lg">
-                                    <i class="fa-regular fa-clock"></i>
+                            <div class="w-16 h-16 mx-auto mb-3 rounded-2xl bg-gradient-to-tr from-amber-500 to-amber-300 text-navy-900 flex items-center justify-center text-2xl font-bold shadow-lg shadow-amber-500/20 border border-amber-300/50">
+                               <img src="logo1.png" alt="Logo" class="w-full h-full object-cover">
+                            </div>
+
+                            <span class="inline-block px-3.5 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider shadow-sm mb-2" :class="getCategoryBadge(activeEvent.category)" x-text="activeEvent.category"></span>
+                            
+                             <p class="text-xs text-amber-300/80 font-medium tracking-widest uppercase mt-1">comité a cargo de este evento</p>
+                               
+                            <br> <h3 class="text-2xl sm:text-3xl font-extrabold font-serif text-white tracking-tight leading-snug mt-1" x-text="activeEvent.title"></h3>
+                        </div>
+
+                        <div class="p-6 space-y-5 bg-slate-900/90">
+                            <div class="grid grid-cols-2 gap-3 bg-slate-800/80 border border-slate-700/80 rounded-2xl p-4 shadow-inner">
+                                <div class="flex items-center space-x-3 border-r border-slate-700/60 pr-2">
+                                    <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-lg">
+                                        <i class="fa-regular fa-calendar-days"></i>
+                                    </div>
+                                    <div>
+                                        <span class="block text-[10px] uppercase font-bold text-slate-400 tracking-wider">Fecha</span>
+                                        <span class="text-xs sm:text-sm font-bold text-slate-100" x-text="formatDateHuman(activeEvent.date)"></span>
+                                    </div>
                                 </div>
-                                <div>
-                                    <span class="block text-[10px] uppercase font-bold text-slate-400 tracking-wider">Hora</span>
-                                    <span class="text-xs sm:text-sm font-bold text-slate-100" x-text="activeEvent.time"></span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- DESCRIPCIÓN Y DETALLES DEL EVENTO -->
-                        <div class="bg-slate-800/40 rounded-2xl p-4 border border-slate-800">
-                            <h4 class="text-xs font-bold uppercase text-amber-400 tracking-wider mb-2 flex items-center gap-1.5">
-                                <i class="fa-solid fa-circle-info"></i> mas detalles
-                            </h4>
-                            <p class="text-sm text-slate-300 leading-relaxed italic font-light" x-text="activeEvent.description || 'Te invitamos cordialmente a acompañarnos en este importante evento.'"></p>
-                        </div>
-
-                        <!-- MENSAJE INVITACIONAL / FOOTER DE LA TARJETA -->
-                        <div class="text-center pt-2">
-                            <p class="text-xs text-slate-400 font-medium">
-                                <span class="text-slate-300">mejor es un dia en tu casa, que mil fuera de ella </span>
-                            </p>
-                            <button @click="closeModal()" class="mt-4 w-full py-3 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-navy-900 font-bold text-sm shadow-lg shadow-amber-500/20 hover:brightness-110 active:scale-[0.98] transition">
-                                fin
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </template>
-
-            <!-- VISTA DE FORMULARIO DE EDICIÓN (SOLO EN MODO ADMINISTRADOR) -->
-            <template x-if="isAdmin">
-                <div>
-                    <div class="bg-slate-800/90 px-6 py-4 border-b border-slate-700 flex justify-between items-center">
-                        <h3 class="text-lg font-bold text-amber-400 flex items-center gap-2">
-                            <i class="fa-solid fa-pen-to-square"></i>
-                            <span x-text="activeEvent.id ? 'Editar Evento' : 'crear Nuevo Evento'"></span>
-                        </h3>
-                    </div>
-
-                    <form @submit.prevent="saveEvent()" class="p-6 space-y-4">
-                        <div>
-                            <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Título del Evento</label>
-                            <input type="text" x-model="activeEvent.title" required placeholder="que evento se celebra" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-slate-100 text-sm focus:outline-none focus:border-amber-400">
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Fecha</label>
-                                <input type="date" x-model="activeEvent.date" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-slate-100 text-sm focus:outline-none">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Hora</label>
-                                <input type="text" x-model="activeEvent.time" required placeholder="Ej: 6:00 PM" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-slate-100 text-sm focus:outline-none">
-                            </div>
-                        </div>
-
-                        <div>
-                            <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Categoría</label>
-                            <select x-model="activeEvent.category" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2.5 text-slate-100 text-sm focus:outline-none">
-                                <option value="culto">Culto</option>
-                                <option value="evento">Evento</option>
-                                <option value="capacitación">Capacitación</option>
-                                <option value="confraternidad">Confraternidad</option>
-                                <option value="especial">Especial</option>
-                                <option value="gavillas">Gavillas</option>
-                                <option value="rayos de luz">Rayos de Luz</option>
-                                <option value="misiones">Misiones</option>
-                                <option value="concierto">Concierto</option>
-                                <option value="convocatoria">Convocatoria</option>
-                                <option value="e-d">Escuela Dominical (E-D)</option>
-                                <option value="general">General</option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Descripción / Notas del Anuncio</label>
-                            <textarea x-model="activeEvent.description" rows="3" placeholder="Añade detalles para la feligresía..." class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2 text-slate-100 text-sm focus:outline-none"></textarea>
-                        </div>
-
-                        <div class="pt-4 flex items-center justify-between border-t border-slate-800">
-                            <template x-if="activeEvent.id">
-                                <button type="button" @click="deleteEvent(activeEvent.id)" class="text-rose-400 hover:text-rose-300 text-xs font-bold flex items-center gap-1">
-                                    <i class="fa-solid fa-trash"></i> Eliminar
-                                </button>
-                            </template>
-                            <div class="flex space-x-3 ml-auto">
-                                <button type="button" @click="closeModal()" class="px-4 py-2 rounded-xl bg-slate-800 border border-slate-700 text-slate-300 text-xs font-bold">Cancelar</button>
-                                <button type="submit" class="px-5 py-2 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 text-navy-900 text-xs font-bold shadow-md">Guardar</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </template>
-        </div>
-    </div>
-</div>
-
-                <template x-if="isAdmin">
-                    <form @submit.prevent="saveEvent()" class="p-6 space-y-4">
-                        <div>
-                            <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Título del Evento</label>
-                            <input type="text" x-model="activeEvent.title" required placeholder="a cargo de que comite" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-slate-100 text-sm focus:outline-none focus:border-amber-400">
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Fecha</label>
-                                <input type="date" x-model="activeEvent.date" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-slate-100 text-sm focus:outline-none">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Hora</label>
-                                <input type="time" x-model="activeEvent.time" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-slate-100 text-sm focus:outline-none">
-                            </div>
-                        </div>
-
-                        <div>
-                            <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Categoría</label>
-                           <select x-model="activeEvent.category" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2.5 text-slate-100 text-sm focus:outline-none">
-                                <option value="culto">culto</option>
-                                <option value="evento">Integracion</option>
-                                <option value="Capacitación">Capacitación</option>
-                                <option value="confraternidad">confraternidad</option>
-                                <option value="especial">culto misionero</option>
-                                <option value="gavillas">gavillas</option>
-                                <option value="rayos de luz">rayos de luz</option>
-                                <option value="misiones">dia misionero</option>
-                                <option value="evento">ofrenda especial</option>
-                                <option value="evento">fogata</option>
-                                <option value="concierto">concierto</option>
-                                <option value="convocatoria">asamblea general</option>
-                                <option value="culto">evento importante</option>
-                                <option value="E-D">escuela dominical</option>
-                                <option value="general">santa cena</option>
                                 
-                            </select>
-                        </div>
+                                <div class="flex items-center space-x-3 pl-1">
+                                    <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-lg">
+                                        <i class="fa-regular fa-clock"></i>
+                                    </div>
+                                    <div>
+                                        <span class="block text-[10px] uppercase font-bold text-slate-400 tracking-wider">Hora</span>
+                                        <span class="text-xs sm:text-sm font-bold text-slate-100" x-text="activeEvent.time"></span>
+                                    </div>
+                                </div>
+                            </div>
 
-                        <div>
-                            <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Descripción / Notas</label>
-                            <textarea x-model="activeEvent.description" rows="3" placeholder="Detalles..." class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2 text-slate-100 text-sm focus:outline-none"></textarea>
-                        </div>
+                            <div class="bg-slate-800/40 rounded-2xl p-4 border border-slate-800">
+                                <h4 class="text-xs font-bold uppercase text-amber-400 tracking-wider mb-2 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-circle-info"></i> más detalles
+                                </h4>
+                                <p class="text-sm text-slate-300 leading-relaxed italic font-light" x-text="activeEvent.description || 'Te invitamos cordialmente a acompañarnos en este importante evento.'"></p>
+                            </div>
 
-                        <div class="pt-4 flex items-center justify-between border-t border-slate-800">
-                            <template x-if="activeEvent.id">
-                                <button type="button" @click="deleteEvent(activeEvent.id)" class="text-rose-400 hover:text-rose-300 text-xs font-bold flex items-center gap-1">
-                                    <i class="fa-solid fa-trash"></i> Eliminar
+                            <div class="text-center pt-2">
+                                <p class="text-xs text-slate-400 font-medium">
+                                    <span class="text-slate-300">Mejor es un día en tus atrios que mil fuera de ellos</span>
+                                </p>
+                                <button @click="closeModal()" class="mt-4 w-full py-3 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-navy-900 font-bold text-sm shadow-lg shadow-amber-500/20 hover:brightness-110 active:scale-[0.98] transition">
+                                    Cerrar
                                 </button>
-                            </template>
-                            <div class="flex space-x-3 ml-auto">
-                                <button type="button" @click="closeModal()" class="px-4 py-2 rounded-xl bg-slate-800 border border-slate-700 text-slate-300 text-xs font-bold">Cancelar</button>
-                                <button type="submit" class="px-5 py-2 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 text-navy-900 text-xs font-bold">Guardar</button>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </template>
 
-                <template x-if="!isAdmin">
-                    <div class="p-6 space-y-4">
-                        <div>
-                            <span class="text-xs px-2.5 py-1 rounded font-semibold uppercase" :class="getCategoryBadge(activeEvent.category)" x-text="activeEvent.category"></span>
-                            <h4 class="text-xl font-bold text-white mt-2" x-text="activeEvent.title"></h4>
+                <!-- VISTA DE FORMULARIO PARA ADMIN -->
+                <template x-if="isAdmin">
+                    <div>
+                        <div class="bg-slate-800/90 px-6 py-4 border-b border-slate-700 flex justify-between items-center">
+                            <h3 class="text-lg font-bold text-amber-400 flex items-center gap-2">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                                <span x-text="activeEvent.id ? 'Editar Evento' : 'Crear Nuevo Evento'"></span>
+                            </h3>
                         </div>
-                        <div class="flex gap-4 text-xs text-slate-300 bg-slate-800 p-3 rounded-xl border border-slate-700">
-                            <div><i class="fa-regular fa-calendar mr-1 text-amber-400"></i> <span x-text="formatDateHuman(activeEvent.date)"></span></div>
-                            <div><i class="fa-regular fa-clock mr-1 text-amber-400"></i> <span x-text="activeEvent.time"></span></div>
-                        </div>
-                        <p class="text-sm text-slate-300 leading-relaxed" x-text="activeEvent.description || 'Sin descripción adicional para este evento.'"></p>
-                        <div class="pt-4 border-t border-slate-800 text-right">
-                            <button @click="closeModal()" class="px-5 py-2 rounded-xl bg-slate-800 text-slate-200 text-xs font-bold hover:bg-slate-700">Cerrar</button>
-                        </div>
+
+                        <form @submit.prevent="saveEvent()" class="p-6 space-y-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Título del Evento</label>
+                                <input type="text" x-model="activeEvent.title" required placeholder="A cargo de qué comité" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-slate-100 text-sm focus:outline-none focus:border-amber-400">
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Fecha</label>
+                                    <input type="date" x-model="activeEvent.date" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-slate-100 text-sm focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Hora</label>
+                                    <input type="text" x-model="activeEvent.time" required placeholder="Ej: 6:00 PM" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-slate-100 text-sm focus:outline-none">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Categoría</label>
+                                <select x-model="activeEvent.category" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2.5 text-slate-100 text-sm focus:outline-none">
+                                    <option value="culto">Culto</option>
+                                    <option value="evento">Integración</option>
+                                    <option value="capacitación">Capacitación</option>
+                                    <option value="confraternidad">Confraternidad</option>
+                                    <option value="especial">Culto Misionero</option>
+                                    <option value="gavillas">Gavillas</option>
+                                    <option value="rayos de luz">Rayos de Luz</option>
+                                    <option value="misiones">Día Misionero</option>
+                                    <option value="concierto">Concierto</option>
+                                    <option value="convocatoria">Asamblea General</option>
+                                    <option value="e-d">Escuela Dominical (E-D)</option>
+                                    <option value="general">Santa Cena</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Descripción / Notas</label>
+                                <textarea x-model="activeEvent.description" rows="3" placeholder="Añade detalles..." class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2 text-slate-100 text-sm focus:outline-none"></textarea>
+                            </div>
+
+                            <div class="pt-4 flex items-center justify-between border-t border-slate-800">
+                                <template x-if="activeEvent.id">
+                                    <button type="button" @click="deleteEvent(activeEvent.id)" class="text-rose-400 hover:text-rose-300 text-xs font-bold flex items-center gap-1">
+                                        <i class="fa-solid fa-trash"></i> Eliminar
+                                    </button>
+                                </template>
+                                <div class="flex space-x-3 ml-auto">
+                                    <button type="button" @click="closeModal()" class="px-4 py-2 rounded-xl bg-slate-800 border border-slate-700 text-slate-300 text-xs font-bold">Cancelar</button>
+                                    <button type="submit" class="px-5 py-2 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 text-navy-900 text-xs font-bold">Guardar</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </template>
             </div>
@@ -838,12 +800,12 @@
     </div>
 
     <!-- NOTIFICATION TOAST -->
-    <div x-show="toast.show" x-cloak x-transition class="fixed bottom-6 right-6 z-50 bg-navy-800 border border-amber-500/40 text-white px-5 py-3.5 rounded-xl shadow-2xl flex items-center space-x-3">
+    <div x-show="toast.show" x-cloak x-transition class="fixed bottom-6 right-24 z-50 bg-navy-800 border border-amber-500/40 text-white px-5 py-3.5 rounded-xl shadow-2xl flex items-center space-x-3">
         <i class="fa-solid fa-circle-check text-amber-400 text-lg"></i>
         <span class="text-sm font-medium" x-text="toast.message"></span>
     </div>
 
-   <!-- ALPINE LOGIC -->
+    <!-- ALPINE LOGIC -->
     <script>
         function appData() {
             return {
@@ -861,14 +823,156 @@
                 activeEvent: { id: null, title: '', date: '', time: '10:00 AM', category: 'Institucional', description: '' },
                 toast: { show: false, message: '' },
 
+                // DATOS Y CONFIGURACIÓN DEL CARRUSEL DE IMÁGENES
+                currentSlide: 0,
+                carouselTimer: null,
+                carouselImages: [
+                    
+                { 
+                        src: 'https://scontent.fibe2-1.fna.fbcdn.net/v/t39.30808-6/481823105_674453811588653_9010364095161687032_n.jpg?stp=cp6_dst-jpg_tt6&cstp=mx2048x1536&ctp=s2048x1536&_nc_cat=104&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeF66Gh8P0TVWXrrp5gb66brRm1nU_U4w7JGbWdT9TjDsnkejPk1mxP6gVdXk_YWGqi4o5qVk7VXMFDI-SMLnR0m&_nc_ohc=yVzzbS6lf74Q7kNvwEk5nWe&_nc_oc=AdoQlVySh3JSAwHfTCABDZgPF-BROIEeC4LYIKzSCwaABoqdBZA9PJyUoVyXvhpNcAUpseY0SG5UsPDtwjxCpD_Y&_nc_zt=23&_nc_ht=scontent.fibe2-1.fna&_nc_gid=RTk1k-ufd3i0vyOxa0vu7w&_nc_ss=732a8&oh=00_AQRiKQp4qyYqqTSn8b0tJBCVnOK75hCKvh_ENtt-weQYRA&oe=6AEC3779', 
+                        alt: 'Edificio Institucional IPUC', 
+                        title: '',
+                        fallback: 'https://placehold.co/800x600/0B192C/FFF?text=IPUC+Sede' 
+                    },
+                { 
+                        src: 'https://scontent.fibe2-1.fna.fbcdn.net/v/t39.30808-6/809910026_1115923747441655_8719187401418333759_n.jpg?stp=dst-jpg_tt6&cstp=mx1376x1824&ctp=s1376x1824&_nc_cat=109&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeGGdWnaf9AIB5hgYiiXkzyXroOByqHcA5Kug4HKodwDkpd7WHT4Zk7P1ml3UeQT9hgieSecv3SgXsafPhNfN9ds&_nc_ohc=cskFRQ5FhaYQ7kNvwGtHgjs&_nc_oc=AdrpkiECK7w7A2zu_-zuKftJjorp8j5MKu_ofdr1r2A6QumtHrY6uPqZdRdEMgje38R7BUZlSdA43wtUZZQ7rb7u&_nc_zt=23&_nc_ht=scontent.fibe2-1.fna&_nc_gid=Gnu92qDocmJ845IMpTHvPA&_nc_ss=732a8&oh=00_AQT8UyMlJhohh5w1Ssdzy72BDFS4LRtOMin8p3KYgvZMGw&oe=6AEC11FB', 
+                        alt: 'Edificio Institucional IPUC', 
+                        title: '',
+                        fallback: 'https://placehold.co/800x600/0B192C/FFF?text=IPUC+Sede' 
+                    },
+                    { 
+                        src: 'https://scontent.fibe2-1.fna.fbcdn.net/v/t39.30808-6/810281432_1115923730774990_7326906419982184057_n.jpg?stp=dst-jpg_tt6&cstp=mx1824x1376&ctp=s1824x1376&_nc_cat=109&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeE3415aSzmGWCeUkoH5iag1p93QuxP9r4en3dC7E_2vh5HKGSOEaMnmp964PrUCQV4t0LYrUIC6pyPfYz4VJoq5&_nc_ohc=m-B1cA5CR6UQ7kNvwFOAwP-&_nc_oc=AdoN5PNeVHWVsq1-_pgeIojDiO7avE3uO4oEkSXtZGhVpwo6uW5nYdmC0VW3RS-WqsxsHaIAOXXsrDyqw2mrxIya&_nc_zt=23&_nc_ht=scontent.fibe2-1.fna&_nc_gid=5DjuWXdSYGsdFH9UtD6Bsg&_nc_ss=732a8&oh=00_AQQ6mhudhEYIk6f9l6Lg0j55rDVDfxWzJ0kYNvQ4n4b7Xw&oe=6AEC2125', 
+                        alt: 'Reuniones y Cultos', 
+                        title: '',
+                        fallback: 'https://placehold.co/800x600/0B192C/FFF?text=Reuniones' 
+                    },
+                    { 
+                        src: 'https://scontent.fibe2-1.fna.fbcdn.net/v/t39.30808-6/811137718_1115923624108334_7360121913761127886_n.jpg?stp=dst-jpg_tt6&cstp=mx1376x1824&ctp=s1376x1824&_nc_cat=111&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeE11SwLuiuQjvjOUlZOUiOOs5o2CSEvitOzmjYJIS-K05a9Kz8dHRK1jAW7fuTN-YU4ERMgXCPyGP_3fwHJYoit&_nc_ohc=MBq9Dss-SRUQ7kNvwEx7Tn0&_nc_oc=AdrjB3aF_JVNJsmFpNVONwaV8YZC7UvkgqzyS9ivVY7cKGcw5dEygRmXjeL09Eo8b3rnqfLT7aSn9Fk0Reyv6dXl&_nc_zt=23&_nc_ht=scontent.fibe2-1.fna&_nc_gid=TS58CJCAWzFM-hhYBWacLw&_nc_ss=732a8&oh=00_AQTl5EyBPmGloEwHTPRPSejkyEjlbCx54yXZvaNQ1n2d6A&oe=6AEC1201', 
+                        alt: 'Actividades de Expansión', 
+                        title: '',
+                        fallback: 'https://placehold.co/800x600/0B192C/FFF?text=Expansion' 
+                    },
+                    { 
+                        src: 'https://scontent.fibe2-1.fna.fbcdn.net/v/t39.30808-6/810623551_1115923347441695_5197538048474324386_n.jpg?stp=dst-jpg_tt6&cstp=mx1824x1376&ctp=s1824x1376&_nc_cat=104&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeHz5zRfSxwD0awCZOwYGKhubr4sej7323Nuvix6PvfbcytTN58Ad2cKbh8HM-jMNhISF_6kWga1sB8HK1Sk9JAY&_nc_ohc=qZqlHu2nNw4Q7kNvwEai-8K&_nc_oc=Adq07nF1-oND1NKUy0gtZUHgmbTm2iphJvhbAoKcS1pc4QUSvHxU6G-rwAgHy_g7YjJGWdaN2CD2frJNGngo0wki&_nc_zt=23&_nc_ht=scontent.fibe2-1.fna&_nc_gid=Awh8AufjlmRRWn-7UrEphQ&_nc_ss=732a8&oh=00_AQSCC_Cq-I5nBR0X-grNTVuFou5RAyPRSvB2ek2JPWy4OA&oe=6AEC0F7F', 
+                        alt: 'Comunidad y Familia', 
+                        title: '',
+                        fallback: 'https://placehold.co/800x600/0B192C/FFF?text=Comunidad' 
+                    },
+
+                    { 
+                        src: 'https://scontent.fibe2-1.fna.fbcdn.net/v/t39.30808-6/811028548_1115922997441730_58581677613150947_n.jpg?stp=dst-jpg_tt6&cstp=mx1824x1376&ctp=s1824x1376&_nc_cat=110&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeFtn8nVcZH8P7o6jrVOS_U1c_i0W4qe6jlz-LRbip7qOVAGNOX5yBIEzDn_LXKgEEHKhMMQUOPUS8RRKhhbxmWm&_nc_ohc=dSot10Xt87MQ7kNvwEiXkS8&_nc_oc=AdqsDbFdKnUhaEgXGWJGFW79sgNQgklbWfP-74IdE0MYK5-ZenkrgsmHZHQbYr1S56vBQmyGjo0JjQFqokCJl6S8&_nc_zt=23&_nc_ht=scontent.fibe2-1.fna&_nc_gid=SVc8V36KrYyZmAGyTXu1dg&_nc_ss=732a8&oh=00_AQR79sweF78BkfU1UAC_bB6DX1k64FV8z43CDW2HNlOdEw&oe=6AEC3201', 
+                        alt: 'Comunidad y Familia', 
+                        title: '',
+                        fallback: 'https://placehold.co/800x600/0B192C/FFF?text=Comunidad' 
+                    },
+
+                    { 
+                        src: 'https://scontent.fibe2-1.fna.fbcdn.net/v/t39.30808-6/750312591_1069546932079337_2440074224215801122_n.jpg?stp=dst-jpg_tt6&cstp=mx1599x1066&ctp=s1599x1066&_nc_cat=110&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeE7eyIYGVgTJvC2l6JI3BfJz6CBuM2VDwzPoIG4zZUPDH1xPGNMWo5cwF-Bf0K93zCbGuZ9iVTm3aNAL9-f2mSb&_nc_ohc=b1W-tQDP-J4Q7kNvwHJ9-js&_nc_oc=Adpm3IH-aJfzTLFU_VECNUkaZc_dy9QLWx01_sDhO9C9nj5p6hBCb3RHklGDsikXgMovZjNl_RZGv2Tfydh0FUeJ&_nc_zt=23&_nc_ht=scontent.fibe2-1.fna&_nc_gid=Pkyx4eyourGd3MC6TqvinQ&_nc_ss=732a8&oh=00_AQSGtzx5DPG4WCYhpKp9gEyUT3AC8BpDdfuvHMbtcNAuTQ&oe=6AEC0B1D', 
+                        alt: 'Comunidad y Familia', 
+                        title: '',
+                        fallback: 'https://placehold.co/800x600/0B192C/FFF?text=Comunidad' 
+                    },
+
+                    { 
+                        src: 'https://scontent.fibe2-1.fna.fbcdn.net/v/t39.30808-6/749330045_1069546842079346_6656241822897679347_n.jpg?stp=dst-jpg_tt6&cstp=mx1599x1066&ctp=s1599x1066&_nc_cat=108&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeEb5Z2fljffnF_yFakMWdtY04kCwuU8YgnTiQLC5TxiCbLOFFjmiMvEMwPuhn5qqFPPxNL2AjhFJlC-Tidrn4tD&_nc_ohc=dcQL1kC_t2sQ7kNvwF6AzeW&_nc_oc=Adr8DiazRY5Bxn6rXgoUctI9o4jEcuCxOfYdIAWhpP8iheud8DDRCq_SIBTorEZLzHuV7P93c95cghfyI3vZmcNI&_nc_zt=23&_nc_ht=scontent.fibe2-1.fna&_nc_gid=NP__QBgmBWaALoEPGzra_A&_nc_ss=732a8&oh=00_AQQV5vsZS_4XDRSgalJW6CbXqcYVU9fy_Viu32yQcjvpog&oe=6AEC2437', 
+                        alt: 'Comunidad y Familia', 
+                        title: '',
+                        fallback: 'https://placehold.co/800x600/0B192C/FFF?text=Comunidad' 
+                    },
+
+                    { 
+                        src: 'https://scontent.fibe2-1.fna.fbcdn.net/v/t39.30808-6/744955064_1069546982079332_3484457320969820533_n.jpg?stp=dst-jpg_tt6&cstp=mx1599x1066&ctp=s1599x1066&_nc_cat=102&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeF1bk4kPS0kdE09Rq0KIZQ5w_pvbkWAKoDD-m9uRYAqgOjpP7HNHqT00NVS1U7m6eYA4odRuclc4Eb8F5o4nUGz&_nc_ohc=XBKkerYD_LYQ7kNvwG5HTar&_nc_oc=Adoq7VQeOEtC4T_6c937FmNSdC7coCUgjRXq2zhaV-H8qz8nIMIVC57HUgDJHwPRkwjT2onlnkOLxvDONsQ-A1r1&_nc_zt=23&_nc_ht=scontent.fibe2-1.fna&_nc_gid=Bvgd-pe3dJpkxJD_jZhMaA&_nc_ss=732a8&oh=00_AQSFI830EimStM2K3JQBcrBfAsWsEeK3XcEEJyvyb7peDQ&oe=6AEC2C7F', 
+                        alt: 'Comunidad y Familia', 
+                        title: '',
+                        fallback: 'https://placehold.co/800x600/0B192C/FFF?text=Comunidad' 
+                    },
+
+                    { 
+                        src: 'https://scontent.fibe2-1.fna.fbcdn.net/v/t39.30808-6/738180568_1056345913399439_2934862601131328679_n.jpg?stp=dst-jpg_tt6&cstp=mx2048x1536&ctp=s2048x1536&_nc_cat=100&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeExOxzBA9tkF3OMDAa92jvj0paLGqQpKWPSlosapCkpYzu9iWx07jBUhoFSnlMIBl7q4-phAF-UMI4c3ND3MGsI&_nc_ohc=2IImabJEdXYQ7kNvwH2mHD7&_nc_oc=AdrDrrzcUNYI0NELFgLZ8i7xuvwYDmzru2UC7y-nxjRaZVVhlKFzBHsAmr00JdJK-eD2IEjUcEJBqqmRyQg9sL3T&_nc_zt=23&_nc_ht=scontent.fibe2-1.fna&_nc_gid=BzHVcIvfaoP7y6yqxoLebA&_nc_ss=732a8&oh=00_AQTFlVHfEDsna66PnapYtEa9cxK0mCjU1tJ6Snyc5e17TA&oe=6AEC0987', 
+                        alt: 'Comunidad y Familia', 
+                        title: '',
+                        fallback: 'https://placehold.co/800x600/0B192C/FFF?text=Comunidad' 
+                    },
+
+                    { 
+                        src: '5.png', 
+                        alt: 'Comunidad y Familia', 
+                        title: '',
+                        fallback: 'https://placehold.co/800x600/0B192C/FFF?text=Comunidad' 
+                    },
+
+
+                    { 
+                        src: 'https://scontent.fibe2-1.fna.fbcdn.net/v/t39.30808-6/497958883_727143296319704_2887081846948357842_n.jpg?stp=dst-jpg_tt6&cstp=mx1599x1066&ctp=s1599x1066&_nc_cat=104&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeGIsmAFBVDYUzuxGELe65k8um__MRJFnXu6b_8xEkWde3BBEmLkyoiReB0rWhqLnz-Jtc_hhX0ICEO_3gn_Sev8&_nc_ohc=372DGcYnpwEQ7kNvwEJLmqC&_nc_oc=Adrw7jaPEmNbNoWP3OvsEVoTwBfqvehvBF5KwfS032X0Ru49OcA0xClXj6_VHUdOaNpfIOKChYd_tlIyP6DMKUk_&_nc_zt=23&_nc_ht=scontent.fibe2-1.fna&_nc_gid=N71ieT85EKe6HcmgKTnAaw&_nc_ss=732a8&oh=00_AQRWYTcYIFqbvO2zd1JOjfoPfYuavPw_VYgqJapNgEh13w&oe=6AEC110B', 
+                        alt: 'Comunidad y Familia', 
+                        title: '',
+                        fallback: 'https://placehold.co/800x600/0B192C/FFF?text=Comunidad' 
+                    },
+                    { 
+                        src: 'https://scontent.fibe2-1.fna.fbcdn.net/v/t39.30808-6/497958883_727143296319704_2887081846948357842_n.jpg?stp=dst-jpg_tt6&cstp=mx1599x1066&ctp=s1599x1066&_nc_cat=104&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeGIsmAFBVDYUzuxGELe65k8um__MRJFnXu6b_8xEkWde3BBEmLkyoiReB0rWhqLnz-Jtc_hhX0ICEO_3gn_Sev8&_nc_ohc=372DGcYnpwEQ7kNvwEJLmqC&_nc_oc=Adrw7jaPEmNbNoWP3OvsEVoTwBfqvehvBF5KwfS032X0Ru49OcA0xClXj6_VHUdOaNpfIOKChYd_tlIyP6DMKUk_&_nc_zt=23&_nc_ht=scontent.fibe2-1.fna&_nc_gid=N71ieT85EKe6HcmgKTnAaw&_nc_ss=732a8&oh=00_AQRWYTcYIFqbvO2zd1JOjfoPfYuavPw_VYgqJapNgEh13w&oe=6AEC110B', 
+                        alt: 'Comunidad y Familia', 
+                        title: '',
+                        fallback: 'https://placehold.co/800x600/0B192C/FFF?text=Comunidad' 
+                    },
+                    { 
+                        src: 'https://scontent.fibe2-1.fna.fbcdn.net/v/t39.30808-6/497463442_727142746319759_8405107013559977883_n.jpg?stp=dst-jpg_tt6&cstp=mx1599x1066&ctp=s1599x1066&_nc_cat=102&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeGc07AzpoRjKpLhAfHikrMgTdKHtQkCjbBN0oe1CQKNsL7LIhI81tZl4EJRUI-U_V-lFABuzTZhixEidkdX5uKH&_nc_ohc=_jYe8NlG__MQ7kNvwHrfiak&_nc_oc=AdpFgNIxR1tk0ScZLyfkE2tXWIB6ujAhxEzzDFNBNcHRvtWvxIiju_3rlsflMB2ty3Kqxq21D04wZeLNiaVE9CWX&_nc_zt=23&_nc_ht=scontent.fibe2-1.fna&_nc_gid=qh7nv616EY3vsTzo4y8a_Q&_nc_ss=732a8&oh=00_AQSSxaHCcu2teH0UemebNuC7WMEB_Qp2_ld88rkRCCeXlA&oe=6AEC227F', 
+                        alt: 'Comunidad y Familia', 
+                        title: '',
+                        fallback: 'https://placehold.co/800x600/0B192C/FFF?text=Comunidad' 
+                    },
+                    { 
+                        src: 'https://scontent.fibe2-1.fna.fbcdn.net/v/t39.30808-6/497646950_727143996319634_6142588835258191459_n.jpg?stp=dst-jpg_tt6&cstp=mx2048x1153&ctp=s2048x1153&_nc_cat=102&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeFaJvfyzklamTLiKMB4Yj6K4y5HQwXjKEzjLkdDBeMoTAHjpDKOmcueGIAhvPCXJ-0RSCTdC1WLg1-spoBwByQk&_nc_ohc=m-lBdhEeKg0Q7kNvwE_60y5&_nc_oc=AdpxABpCto7hQO85Nnvt0I-DeRUaIYeun0_vHcXTl8DRwTI-TTzLE5lsaZ6hkhBA69WU2GjfVjgkZlRKwTe6vOZR&_nc_zt=23&_nc_ht=scontent.fibe2-1.fna&_nc_gid=KkvJ2btCMnaXep8FrNkgHA&_nc_ss=732a8&oh=00_AQQ41md1E3SCGCi-BwixCr26eMrnYEeg_AOYRePWS758jw&oe=6AEC3580', 
+                        alt: 'Comunidad y Familia', 
+                        title: '',
+                        fallback: 'https://placehold.co/800x600/0B192C/FFF?text=Comunidad' 
+                    },
+
+                    { 
+                        src: 'https://scontent.fibe2-1.fna.fbcdn.net/v/t39.30808-6/482975505_680180811015953_6831263810660962050_n.jpg?stp=cp6_dst-jpg_tt6&cstp=mx2048x1536&ctp=s2048x1536&_nc_cat=110&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeH7v3zid9QxaLTe9kxn3Rw9Evr_j-L-sI8S-v-P4v6wj8CSsQpiY3-Mvh3Jb3iVnGvmAxeCnwqA3oLpxte7fd9X&_nc_ohc=txlPuUMF7KsQ7kNvwFRRmgj&_nc_oc=AdoCgt4jefBYQ3bfCeFN0Gq-33M65b7ectY2iNalJ4aorUrtpYm-OwYA5Y7WrttYXZatHqFglxj7Jv1QVyiuzAir&_nc_zt=23&_nc_ht=scontent.fibe2-1.fna&_nc_gid=jGKgyQg-zK1GWKCo_Id8ew&_nc_ss=732a8&oh=00_AQSs-bBefstVCd7F4YAe7bpNnVuWUyQ3QrYET6RI3SaS8g&oe=6AEC1B09', 
+                        alt: 'Comunidad y Familia', 
+                        title: '',
+                        fallback: 'https://placehold.co/800x600/0B192C/FFF?text=Comunidad' 
+                    }
+                ],
+
+                // CONFIGURACIÓN DE CONTACTO POR WHATSAPP
+                whatsappPhone: '573138094678', // Reemplaza con tu número de teléfono con código de país (ejemplo: 57 para Colombia)
+                whatsappMessage: '¡Hola! Quisiera obtener información acerca de la IPUC Octava Sede.',
+
                 initApp() {
                     const today = new Date();
                     this.currentYear = today.getFullYear();
                     this.currentMonth = today.getMonth();
                     this.loadEvents();
                     this.renderCalendar();
+                    this.startCarousel();
                 },
 
+                // METODOS DEL CARRUSEL
+                startCarousel() {
+                    if (this.carouselTimer) clearInterval(this.carouselTimer);
+                    this.carouselTimer = setInterval(() => {
+                        this.nextSlide();
+                    }, 4000);
+                },
+
+                stopCarousel() {
+                    if (this.carouselTimer) clearInterval(this.carouselTimer);
+                },
+
+                nextSlide() {
+                    this.currentSlide = (this.currentSlide + 1) % this.carouselImages.length;
+                },
+
+                prevSlide() {
+                    this.currentSlide = (this.currentSlide - 1 + this.carouselImages.length) % this.carouselImages.length;
+                },
+
+                goToSlide(index) {
+                    this.currentSlide = index;
+                },
+
+                // METODOS DE EVENTOS Y AGENDA
                 loadEvents() {
                     fetch('eventos.json')
                         .then(response => {
@@ -1020,7 +1124,6 @@
 
                 viewOrEditEvent(event) {
                     this.activeEvent = JSON.parse(JSON.stringify(event));
-                    // Convertir formato de hora si viene en militar por datos antiguos
                     this.activeEvent.time = this.formatTimeTo12h(this.activeEvent.time);
                     this.showEventModal = true;
                 },
@@ -1029,20 +1132,18 @@
                     this.showEventModal = false;
                 },
 
-                // Función auxiliar para convertir formato HH:MM a AM/PM
                 formatTimeTo12h(timeStr) {
                     if (!timeStr || timeStr.includes('M')) return timeStr || '10:00 AM';
                     const [hourStr, minuteStr] = timeStr.split(':');
                     let hour = parseInt(hourStr, 10);
                     const ampm = hour >= 12 ? 'PM' : 'AM';
                     hour = hour % 12;
-                    hour = hour ? hour : 12; // La hora 0 se convierte en 12
+                    hour = hour ? hour : 12;
                     return `${hour}:${minuteStr || '00'} ${ampm}`;
                 },
 
                 saveEvent() {
                     if (!this.isAdmin) return;
-                    // Asegurar formato 12h antes de guardar
                     this.activeEvent.time = this.formatTimeTo12h(this.activeEvent.time);
 
                     if (this.activeEvent.id) {
@@ -1068,39 +1169,36 @@
                     this.showToast('Evento eliminado de la agenda');
                 },
 
-
-
-
-
-                getCategoryClasses(category) {switch (category) {
-        case 'culto': 
-            return 'bg-blue-500/20 text-blue-300 border-blue-500/30';
-        case 'evento': 
-            return 'bg-amber-500/20 text-amber-300 border-amber-500/30';
-        case 'capacitación': 
-            return 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30';
-        case 'confraternidad': 
-            return 'bg-purple-500/20 text-purple-300 border-purple-500/30';
-        case 'especial': 
-            return 'bg-rose-500/20 text-rose-300 border-rose-500/30';
-        case 'gavillas': 
-            return 'bg-yellow-500/20 text-yellow-300 border-yellow-500/30';
-        case 'rayos de luz': 
-            return 'bg-orange-500/20 text-orange-300 border-orange-500/30';
-        case 'misiones': 
-            return 'bg-teal-500/20 text-teal-300 border-teal-500/30';
-        case 'concierto': 
-            return 'bg-indigo-500/20 text-indigo-300 border-indigo-500/30';
-        case 'convocatoria': 
-            return 'bg-cyan-500/20 text-cyan-300 border-cyan-500/30';
-        case 'e-d': 
-            return 'bg-lime-500/20 text-lime-300 border-lime-500/30';
-        case 'general': 
-            return 'bg-sky-500/20 text-sky-300 border-sky-500/30';
-        default: 
-            return 'bg-slate-700 text-slate-300 border-slate-600';
-    }
-},
+                getCategoryClasses(category) {
+                    switch (category) {
+                        case 'culto': 
+                            return 'bg-blue-500/20 text-blue-300 border-blue-500/30';
+                        case 'evento': 
+                            return 'bg-amber-500/20 text-amber-300 border-amber-500/30';
+                        case 'capacitación': 
+                            return 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30';
+                        case 'confraternidad': 
+                            return 'bg-purple-500/20 text-purple-300 border-purple-500/30';
+                        case 'especial': 
+                            return 'bg-rose-500/20 text-rose-300 border-rose-500/30';
+                        case 'gavillas': 
+                            return 'bg-yellow-500/20 text-yellow-300 border-yellow-500/30';
+                        case 'rayos de luz': 
+                            return 'bg-orange-500/20 text-orange-300 border-orange-500/30';
+                        case 'misiones': 
+                            return 'bg-teal-500/20 text-teal-300 border-teal-500/30';
+                        case 'concierto': 
+                            return 'bg-indigo-500/20 text-indigo-300 border-indigo-500/30';
+                        case 'convocatoria': 
+                            return 'bg-cyan-500/20 text-cyan-300 border-cyan-500/30';
+                        case 'e-d': 
+                            return 'bg-lime-500/20 text-lime-300 border-lime-500/30';
+                        case 'general': 
+                            return 'bg-sky-500/20 text-sky-300 border-sky-500/30';
+                        default: 
+                            return 'bg-slate-700 text-slate-300 border-slate-600';
+                    }
+                },
 
                 getCategoryBadge(category) {
                     return this.getCategoryClasses(category);
